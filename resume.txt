@@ -1,0 +1,78 @@
+IYANUOLUWA ADEBIYI
+Senior AI Trainer & Multi-Modal Evaluation Specialist
+Lagos, Nigeria
+adebiyicaleb222@gmail.com | +234 705 030 1256 | https://www.linkedin.com/in/iyanuoluwa-adebiyi-5a3a78431 | https://iyanu-portfolio-pi.vercel.app/ | https://adebiyicalebportfolio.vercel.app/
+
+SUMMARY
+Experienced Senior AI Trainer, Evaluator, and Digital Content Creator specializing in training, fine-tuning, and assessing foundation LLMs and multi-modal models. Proven track record in RLHF, Supervised Fine-Tuning (SFT), prompt-response pair generation, and red-teaming across leading global platforms. Combines technical AI evaluation with expertise as a freelance Graphic Designer and Video Editor (Fiverr & Upwork) to deliver high-fidelity visual and textual data for frontier AI research teams.
+
+TECHNICAL SKILLS
+Model Training & Alignment: Data Annotation, Model Evaluation, RLHF Alignment, Supervised Fine-Tuning (SFT), Constitutional AI
+Evaluation & Red-Teaming: Prompt Engineering, Preference Ranking, Hallucination Detection, Red-Teaming, Adversarial Prompting
+Quality Assurance & Data: LLM Benchmarking, Semantic Labeling, Edge-Case Resolution, Python (Data QA & Parsing Scripts), Multimodal QA
+Design & Media Tools: Graphic Design, Video Editing, Motion Design, Figma, Adobe Creative Cloud
+Cloud & Frameworks: AWS, Microsoft Azure, Google Cloud, PyTorch, Hugging Face Transformers, Pandas, NumPy
+
+PROFESSIONAL EXPERIENCE
+AI Data Evaluator & Domain Specialist
+Mercor | Feb 2024 – Present
+- Perform multi-turn dialogue evaluations, hallucination detection, and preference rankings on complex reasoning tasks for RLHF alignment.
+- Author gold-standard reference responses, technical prompt expansions, and logic verifications to optimize reward model scoring.
+- Execute adversarial red-teaming protocols and safety auditing to identify jailbreaks, toxic outputs, and policy violations.
+
+AI Systems & Automation Specialist
+Miva Open University | Jan 2024 – 2026
+- Audit educational platform data structures, multi-modal layout consistency, and automated grading assistant outputs.
+- Engineered Python data parsing scripts to validate data pipeline integrity and cross-verify automated visual and textual evaluation outputs.
+
+Freelance Graphic Designer & Video Editor
+Fiverr & Upwork | Jan 2022 – Present
+- Produce visual assets, promotional videos, keyframe animation, and UI graphics for global clients, maintaining 5-star rating standards.
+- Perform video sequence editing, motion design, and thumbnail creation using Adobe Creative Cloud and modern digital media tools.
+- Leverage multimedia design skills to evaluate image-to-video and text-to-image generative AI tools for visual accuracy and layout integrity.
+
+AI Data Annotator & Evaluator
+OneForma | June 2023 – Jan 2025
+- Executed large-scale natural language annotation, semantic segmentation, and intent classification across multi-domain datasets.
+- Evaluated generative model outputs for truthfulness, toxicity, bias, and adherence to complex Constitutional AI guidelines.
+
+LLM Data Annotation Specialist
+Turing | Mar 2022 – May 2023
+- Crafted complex technical prompts and verified code/text generations to improve Supervised Fine-Tuning (SFT) dataset quality.
+- Annotated multi-modal datasets by tagging bounding boxes and evaluating text-to-image semantic alignment for visual models.
+
+KEY PROJECTS
+Large Language Model (LLM) Safety, Alignment & Red-Teaming
+Independent AI Research | Jan 2024 – Present
+- Evaluated multi-turn text conversations to ensure strict adherence to safety, ethical, and legal frameworks.
+- Identified adversarial prompt injections, policy violations, and edge-case vulnerabilities, applying comprehensive rubrics to mitigate harmful model outputs.
+
+RLHF & Preference Ranking Optimization
+Frontier Model Evaluation | Mar 2023 – Present
+- Trained cutting-edge foundation models by providing granular human preference feedback.
+- Generated complex multi-turn prompts, ranked alternative model outputs based on truthfulness and helpfulness, and authored detailed critiques to guide reward models.
+
+Supervised Fine-Tuning (SFT) & Gold Standard Data Generation
+Data Quality Initiatives | Jan 2023 – Present
+- Authored thousands of high-quality "gold standard" prompt-response datasets used for model initialization and instruction-following enhancement.
+- Focused on complex logical reasoning, strict formatting constraints, and domain-specific precision.
+
+Multi-Modal AI Training & Multimedia Quality Assurance
+Vision & Video Evaluation | Jun 2023 – Present
+- Evaluated model behavior across text-to-image, image-to-text, and video generation workflows to verify spatial layout adherence, motion continuity, and visual fidelity.
+- Flagged rendering inconsistencies and annotated complex multi-modal context datasets.
+
+EDUCATION
+M.Sc. in Computer Applications
+University of Suffolk, United Kingdom | 2024 – 2025
+
+B.Sc. in Computer Science
+University of Abuja, Nigeria | 2018 – 2022
+
+CERTIFICATIONS
+- Generative AI with Large Language Models — DeepLearning.AI & AWS (2025)
+- AWS Certified AI Practitioner (AIF-C01) — Amazon Web Services (2025)
+- IBM Generative AI Engineering Professional — IBM (2024)
+- AI Alignment, Red-Teaming & Safety Specialization — DeepLearning.AI (2024)
+- Google Cloud Professional Machine Learning Engineer — Google Cloud (2023)
+- Microsoft Certified: Azure AI Engineer Associate — Microsoft (2025)
