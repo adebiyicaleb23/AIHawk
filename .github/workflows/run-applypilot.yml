@@ -2,31 +2,14 @@ name: Run ApplyPilot
 
 on:
   schedule:
-    # Runs every day at 08:00 UTC (9:00 AM West Africa Time)
-    - cron: '0 8 * * *'
-  workflow_dispatch: # Allows you to click a button to run it manually anytime
-    inputs:
-      stages:
-        description: 'Stages to run (e.g. all, or discover enrich score tailor)'
-        required: false
-        default: 'all'
-      min_score:
-        description: 'Minimum fit score (1-10)'
-        required: false
-        default: '7'
+    - cron: '0 5 * * *'
+  workflow_dispatch:
 
 jobs:
-  applypilot-run:
+  run-applypilot:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
-
-    env:
-      APPLYPILOT_DIR: ${{ github.workspace }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-      PYTHONUNBUFFERED: "1"
-
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python
@@ -35,42 +18,36 @@ jobs:
           python-version: '3.11'
           cache: 'pip'
 
-      - name: Install System Dependencies
+      - name: Install ApplyPilot and Dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libnss3 libnspr4 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 libcairo2 libasound2
-
-      - name: Install ApplyPilot & Dependencies
-        run: |
-          python -m pip install --upgrade pip
+          pip install --upgrade pip
           pip install applypilot
           pip install --no-deps python-jobspy
           pip install pydantic tls-client requests markdownify regex curl_cffi
           playwright install --with-deps chromium
 
-      - name: Verify ApplyPilot Environment (Doctor)
+      - name: Copy Profile, Resume, and Searches
         run: |
-          # Copy files to ~/.applypilot as backup fallback for both paths
-          mkdir -p ~/.applypilot
-          cp profile.json searches.yaml resume.txt ~/.applypilot/ 2>/dev/null || true
-          cp resume.pdf ~/.applypilot/ 2>/dev/null || true
-          python -m applypilot doctor
+          mkdir -p /home/runner/.applypilot
+          cp profile.json /home/runner/.applypilot/
+          cp searches.yaml /home/runner/.applypilot/
+          cp resume.txt /home/runner/.applypilot/
+          cp resume.pdf /home/runner/.applypilot/ 2>/dev/null || true
 
       - name: Run ApplyPilot Pipeline
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          PYTHONUNBUFFERED: "1"
         run: |
-          STAGES="${{ github.event.inputs.stages || 'all' }}"
-          MIN_SCORE="${{ github.event.inputs.min_score || '7' }}"
-          echo "Running ApplyPilot stages: $STAGES (min score: $MIN_SCORE)"
-          python -m applypilot run $STAGES --min-score $MIN_SCORE --validation normal
+          applypilot run --validation lenient
 
-      - name: Upload Tailored Resumes & Database Artifacts
+      - name: Upload Tailored Resumes & Results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: applypilot-output
+          name: tailored-resumes
           path: |
-            tailored_resumes/
-            cover_letters/
-            applypilot.db
-            logs/
+            /home/runner/.applypilot/tailored_resumes/
+            /home/runner/.applypilot/cover_letters/
+            /home/runner/.applypilot/applypilot.db
           if-no-files-found: ignore
