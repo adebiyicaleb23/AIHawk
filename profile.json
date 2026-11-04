@@ -43,6 +43,14 @@
       "Hugging Face Transformers"
     ],
     "tools": [
+      "Virtual Assistance",
+      "Administrative Support",
+      "Client Communication & CRM",
+      "Email & Calendar Management",
+      "Data Entry & Documentation",
+      "Workflow Organization",
+      "Google Workspace",
+      "Microsoft Office 365",
       "Data Annotation",
       "Model Evaluation",
       "RLHF (Reinforcement Learning from Human Feedback) Alignment",
@@ -81,7 +89,8 @@
       "Large Language Model (LLM) Safety, Alignment & Red-Teaming",
       "RLHF & Preference Ranking Optimization",
       "Supervised Fine-Tuning (SFT) & Gold Standard Data Generation",
-      "Multi-Modal AI Training & Multimedia Quality Assurance"
+      "Multi-Modal AI Training & Multimedia Quality Assurance",
+      "Virtual Assistance & Remote Operations Management"
     ],
     "preserved_school": "University of Suffolk, United Kingdom | University of Abuja, Nigeria",
     "real_metrics": [

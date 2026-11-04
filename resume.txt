@@ -4,12 +4,13 @@ Lagos, Nigeria
 adebiyicaleb222@gmail.com | +234 705 030 1256 | https://www.linkedin.com/in/iyanuoluwa-adebiyi-5a3a78431 | https://iyanu-portfolio-pi.vercel.app/ | https://adebiyicalebportfolio.vercel.app/
 
 SUMMARY
-Experienced Senior AI Trainer, Evaluator, and Digital Content Creator specializing in training, fine-tuning, and assessing foundation LLMs and multi-modal models. Proven track record in RLHF, Supervised Fine-Tuning (SFT), prompt-response pair generation, and red-teaming across leading global platforms. Combines technical AI evaluation with expertise as a freelance Graphic Designer and Video Editor (Fiverr & Upwork) to deliver high-fidelity visual and textual data for frontier AI research teams.
+Experienced Senior AI Trainer, Evaluator, and Digital Content Creator specializing in training, fine-tuning, and assessing foundation LLMs and multi-modal models. Proven track record in RLHF, Supervised Fine-Tuning (SFT), prompt-response pair generation, and red-teaming across leading global platforms. Combines technical AI evaluation with expertise as a freelance Graphic Designer, Video Editor, and Virtual Assistant (Fiverr & Upwork) delivering high-fidelity visual/textual data and digital project coordination for global clients.
 
 TECHNICAL SKILLS
 Model Training & Alignment: Data Annotation, Model Evaluation, RLHF Alignment, Supervised Fine-Tuning (SFT), Constitutional AI
 Evaluation & Red-Teaming: Prompt Engineering, Preference Ranking, Hallucination Detection, Red-Teaming, Adversarial Prompting
 Quality Assurance & Data: LLM Benchmarking, Semantic Labeling, Edge-Case Resolution, Python (Data QA & Parsing Scripts), Multimodal QA
+Operations & Administration: Virtual Assistance, Client Communication & CRM, Email & Calendar Management, Data Entry, Workflow Organization, Google Workspace, Microsoft Office 365
 Design & Media Tools: Graphic Design, Video Editing, Motion Design, Figma, Adobe Creative Cloud
 Cloud & Frameworks: AWS, Microsoft Azure, Google Cloud, PyTorch, Hugging Face Transformers, Pandas, NumPy
 
@@ -25,11 +26,12 @@ Miva Open University | Jan 2024 – 2026
 - Audit educational platform data structures, multi-modal layout consistency, and automated grading assistant outputs.
 - Engineered Python data parsing scripts to validate data pipeline integrity and cross-verify automated visual and textual evaluation outputs.
 
-Freelance Graphic Designer & Video Editor
+Freelance Virtual Assistant, Graphic Designer & Video Editor
 Fiverr & Upwork | Jan 2022 – Present
-- Produce visual assets, promotional videos, keyframe animation, and UI graphics for global clients, maintaining 5-star rating standards.
-- Perform video sequence editing, motion design, and thumbnail creation using Adobe Creative Cloud and modern digital media tools.
-- Leverage multimedia design skills to evaluate image-to-video and text-to-image generative AI tools for visual accuracy and layout integrity.
+- Delivered virtual assistance, administrative coordination, and client communication for international businesses and creators, maintaining 5-star rating standards.
+- Handled email correspondence, calendar scheduling, data entry, CRM updates, and digital asset organization.
+- Produced visual assets, promotional videos, keyframe animation, and UI graphics using Adobe Creative Cloud, Figma, and modern productivity suites.
+- Leveraged multimedia skills to evaluate image-to-video and text-to-image generative AI tools for accuracy and layout integrity.
 
 AI Data Annotator & Evaluator
 OneForma | June 2023 – Jan 2025
@@ -51,6 +53,11 @@ RLHF & Preference Ranking Optimization
 Frontier Model Evaluation | Mar 2023 – Present
 - Trained cutting-edge foundation models by providing granular human preference feedback.
 - Generated complex multi-turn prompts, ranked alternative model outputs based on truthfulness and helpfulness, and authored detailed critiques to guide reward models.
+
+Virtual Assistance & Remote Operations Management
+Freelance Client Projects | Jan 2022 – Present
+- Managed asynchronous communication, task management, document formatting, and customer inquiry response for digital agencies.
+- Maintained organized spreadsheets, handled scheduling across time zones, and automated repetitive administrative workflows.
 
 Supervised Fine-Tuning (SFT) & Gold Standard Data Generation
 Data Quality Initiatives | Jan 2023 – Present
@@ -76,4 +83,3 @@ CERTIFICATIONS
 - AI Alignment, Red-Teaming & Safety Specialization — DeepLearning.AI (2024)
 - Google Cloud Professional Machine Learning Engineer — Google Cloud (2023)
 - Microsoft Certified: Azure AI Engineer Associate — Microsoft (2025)
-

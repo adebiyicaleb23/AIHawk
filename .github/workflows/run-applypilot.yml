@@ -39,7 +39,7 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           PYTHONUNBUFFERED: "1"
         run: |
-          applypilot run --validation lenient
+          applypilot run --min-score 5 --validation lenient
 
       - name: Upload Tailored Resumes & Results
         if: always()

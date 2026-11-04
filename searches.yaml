@@ -15,6 +15,12 @@ queries:
   - query: "AI Trainer"
     tier: 1
   - query: "AI Data Evaluator"
+    tier: 1
+  - query: "Virtual Assistant"
+    tier: 1
+  - query: "Executive Assistant"
+    tier: 2
+  - query: "Data Entry Specialist"
     tier: 2
   - query: "LLM Data Annotation Specialist"
     tier: 3
