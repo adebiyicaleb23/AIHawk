@@ -1,0 +1,9 @@
+applypilot
+python-jobspy
+pydantic
+tls-client
+requests
+markdownify
+regex
+curl_cffi
+playwright
