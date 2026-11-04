@@ -76,3 +76,4 @@ CERTIFICATIONS
 - AI Alignment, Red-Teaming & Safety Specialization — DeepLearning.AI (2024)
 - Google Cloud Professional Machine Learning Engineer — Google Cloud (2023)
 - Microsoft Certified: Azure AI Engineer Associate — Microsoft (2025)
+

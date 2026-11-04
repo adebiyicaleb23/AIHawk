@@ -41,3 +41,4 @@ python -m applypilot doctor
 # Discover new jobs and tailor resumes
 python -m applypilot run
 ```
+
