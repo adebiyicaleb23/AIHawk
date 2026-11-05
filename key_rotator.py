@@ -37,31 +37,44 @@ if not keys:
     print("[KeyRotator] ERROR: No GEMINI_API_KEY found in environment.", flush=True)
     sys.exit(1)
 
-# ── Patch LLMClient only if we have more than one key ────────────────────────
+# ── Patch LLMClient to instantly rotate on 429 ──────────────────────────────
 if len(keys) > 1:
-    _orig_chat = llm_mod.LLMClient.chat
+    key_index = 0
 
-    def _rotating_chat(self, messages, temperature=0.0, max_tokens=4096):
-        last_exc = None
-        for i, key in enumerate(keys):
-            self.api_key = key
-            try:
-                return _orig_chat(self, messages, temperature, max_tokens)
-            except httpx.HTTPStatusError as exc:
-                if exc.response.status_code == 429 and i < len(keys) - 1:
-                    print(
-                        f"[KeyRotator] Key {i + 1} rate-limited (429) "
-                        f"→ switching to key {i + 2}",
-                        flush=True,
-                    )
-                    last_exc = exc
-                    continue
-                raise  # re-raise non-429 errors immediately
-        raise last_exc  # all keys exhausted
+    _orig_chat_compat = llm_mod.LLMClient._chat_compat
+    _orig_chat_native = llm_mod.LLMClient._chat_native_gemini
 
-    llm_mod.LLMClient.chat = _rotating_chat
+    def _rotate_key(self):
+        global key_index
+        key_index = (key_index + 1) % len(keys)
+        self.api_key = keys[key_index]
+        print(f"[KeyRotator] Rate limit hit! Instantly switched to key #{key_index + 1}", flush=True)
+
+    def _fast_chat_compat(self, messages, temperature, max_tokens):
+        for _ in range(len(keys)):
+            self.api_key = keys[key_index]
+            resp = self._client.post(
+                f"{self.base_url}/chat/completions",
+                json={
+                    "model": self.model,
+                    "messages": messages,
+                    "temperature": temperature,
+                    "max_tokens": max_tokens,
+                },
+                headers={"Content-Type": "application/json", "Authorization": f"Bearer {self.api_key}"},
+            )
+            if resp.status_code == 429:
+                _rotate_key(self)
+                continue
+            if resp.status_code == 403 and self._is_gemini:
+                raise llm_mod._GeminiCompatForbidden(resp)
+            return self._handle_compat_response(resp)
+        # All keys hit 429 in a row; fall back to normal response so backoff can run
+        return _orig_chat_compat(self, messages, temperature, max_tokens)
+
+    llm_mod.LLMClient._chat_compat = _fast_chat_compat
     print(
-        f"[KeyRotator] Key rotation active — {len(keys)} Gemini keys loaded.",
+        f"[KeyRotator] Instant rotation active across {len(keys)} Gemini keys.",
         flush=True,
     )
 else:
