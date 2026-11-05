@@ -18,9 +18,19 @@ queries:
     tier: 1
   - query: "Virtual Assistant"
     tier: 1
+  - query: "Graphic Designer"
+    tier: 1
+  - query: "Social Media Manager"
+    tier: 1
+  - query: "Video Editor"
+    tier: 2
   - query: "Executive Assistant"
     tier: 2
   - query: "Data Entry Specialist"
+    tier: 2
+  - query: "Customer Support Specialist"
+    tier: 2
+  - query: "Lead Generation Specialist"
     tier: 2
   - query: "LLM Data Annotation Specialist"
     tier: 3
