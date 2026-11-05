@@ -37,10 +37,12 @@ jobs:
         env:
           APPLYPILOT_DIR: /home/runner/.applypilot
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
+          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
           LLM_MODEL: gemini-3.1-flash-lite
           PYTHONUNBUFFERED: "1"
         run: |
-          applypilot run --min-score 5 --validation lenient
+          python key_rotator.py run --min-score 5 --validation lenient
 
       - name: Upload Tailored Resumes & Results
         if: always()
