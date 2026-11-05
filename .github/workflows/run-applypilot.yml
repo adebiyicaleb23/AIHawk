@@ -59,6 +59,18 @@ jobs:
         run: |
           python key_rotator.py run --min-score 5 --validation lenient
 
+      - name: Auto-Apply to Tailored Jobs
+        if: always()
+        env:
+          APPLYPILOT_DIR: /home/runner/.applypilot
+          MY_EMAIL: ${{ secrets.MY_EMAIL }}
+          MY_EMAIL_PASSWORD: ${{ secrets.MY_EMAIL_PASSWORD }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_ACCESS: ${{ secrets.GEMINI_API_ACCESS }}
+          GEMINI_API_NAME: ${{ secrets.GEMINI_API_NAME }}
+        run: |
+          python auto_applier.py || true
+
       - name: Upload Tailored Resumes & Results
         if: always()
         uses: actions/upload-artifact@v4
