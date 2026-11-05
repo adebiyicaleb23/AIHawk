@@ -19,11 +19,19 @@ import sys
 import httpx
 import applypilot.llm as llm_mod
 
-# ── Collect all Gemini keys in sorted order ──────────────────────────────────
-keys = [
-    v for k, v in sorted(os.environ.items())
-    if k.startswith("GEMINI_API_KEY") and v.strip()
-]
+# ── Collect all Gemini keys from environment ────────────────────────────────
+candidate_vars = ["GEMINI_API_KEY", "GEMINI_API_ACCESS", "GEMINI_API_NAME"]
+keys = []
+for var in candidate_vars:
+    val = os.environ.get(var, "").strip()
+    if val and val not in keys:
+        keys.append(val)
+
+# Also check any other GEMINI_* vars that might be keys
+for k, v in sorted(os.environ.items()):
+    val = v.strip()
+    if k.startswith("GEMINI_") and val and val not in keys and len(val) > 20:
+        keys.append(val)
 
 if not keys:
     print("[KeyRotator] ERROR: No GEMINI_API_KEY found in environment.", flush=True)
@@ -63,3 +71,4 @@ else:
 from applypilot.__main__ import app  # noqa: E402
 
 app()
+

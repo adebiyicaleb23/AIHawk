@@ -37,8 +37,8 @@ jobs:
         env:
           APPLYPILOT_DIR: /home/runner/.applypilot
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
-          GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
+          GEMINI_API_ACCESS: ${{ secrets.GEMINI_API_ACCESS }}
+          GEMINI_API_NAME: ${{ secrets.GEMINI_API_NAME }}
           LLM_MODEL: gemini-3.1-flash-lite
           PYTHONUNBUFFERED: "1"
         run: |
