@@ -116,13 +116,16 @@ for idx, q_item in enumerate(queries, 1):
     print("=" * 80, flush=True)
 
     # Prepare single-query config for ApplyPilot
+    # Use LinkedIn + ZipRecruiter only: Indeed blocks GitHub Actions cloud IPs (403/429)
+    # Use hours_old=168 (7 days) so fresh-but-not-brand-new AI postings are captured
     single_cfg = {
         "defaults": {
             "location": "Remote",
             "distance": 0,
-            "hours_old": 72,
+            "hours_old": 168,
             "results_per_site": 5,
         },
+        "sites": ["linkedin", "zip_recruiter"],
         "locations": [
             {"location": "Remote", "remote": True}
         ],
@@ -197,3 +200,4 @@ if DB_PATH.exists():
         conn.close()
     except Exception as e:
         log.warning(f"Could not print final summary: {e}")
+
