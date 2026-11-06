@@ -123,7 +123,7 @@ for idx, q_item in enumerate(queries, 1):
             "location": "Remote",
             "distance": 0,
             "hours_old": 168,
-            "results_per_site": 5,
+            "results_per_site": 10,
         },
         "sites": ["linkedin", "zip_recruiter"],
         "locations": [
@@ -152,7 +152,7 @@ for idx, q_item in enumerate(queries, 1):
         log.info(f"Running pipeline for '{query_text}'...")
         pipeline.run_pipeline(
             stages=["discover", "enrich", "score", "tailor", "cover", "pdf"],
-            min_score=5,
+            min_score=7,
             validation_mode="lenient"
         )
     except Exception as e:
