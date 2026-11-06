@@ -22,7 +22,7 @@ jobs:
           pip install --upgrade pip
           pip install applypilot
           pip install --no-deps python-jobspy
-          pip install pydantic tls-client requests markdownify regex curl_cffi
+          pip install pydantic tls-client requests markdownify regex curl_cffi pyyaml httpx
           playwright install --with-deps chromium
 
       - name: Copy Profile, Resume, and Searches
@@ -48,19 +48,7 @@ jobs:
               json.dump(d, f, indent=2)
           "
 
-      - name: Run ApplyPilot Pipeline
-        env:
-          APPLYPILOT_DIR: /home/runner/.applypilot
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_API_ACCESS: ${{ secrets.GEMINI_API_ACCESS }}
-          GEMINI_API_NAME: ${{ secrets.GEMINI_API_NAME }}
-          LLM_MODEL: gemini-3.1-flash-lite
-          PYTHONUNBUFFERED: "1"
-        run: |
-          python key_rotator.py run --min-score 5 --validation lenient
-
-      - name: Auto-Apply to Tailored Jobs
-        if: always()
+      - name: Run ApplyPilot Query-by-Query Loop & Auto-Applier
         env:
           APPLYPILOT_DIR: /home/runner/.applypilot
           MY_EMAIL: ${{ secrets.MY_EMAIL }}
@@ -68,8 +56,10 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_API_ACCESS: ${{ secrets.GEMINI_API_ACCESS }}
           GEMINI_API_NAME: ${{ secrets.GEMINI_API_NAME }}
+          LLM_MODEL: gemini-3.1-flash-lite
+          PYTHONUNBUFFERED: "1"
         run: |
-          python auto_applier.py || true
+          python orchestrator.py
 
       - name: Upload Tailored Resumes & Results
         if: always()
