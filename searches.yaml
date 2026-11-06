@@ -5,40 +5,12 @@ defaults:
   location: "Remote"
   distance: 0
   hours_old: 72
-  results_per_site: 15
+  results_per_site: 1
 
 locations:
   - location: "Remote"
     remote: true
 
 queries:
-  - query: "AI Trainer"
-    tier: 1
-  - query: "AI Data Evaluator"
-    tier: 1
   - query: "Virtual Assistant"
     tier: 1
-  - query: "Graphic Designer"
-    tier: 1
-  - query: "Social Media Manager"
-    tier: 1
-  - query: "Video Editor"
-    tier: 2
-  - query: "Executive Assistant"
-    tier: 2
-  - query: "Data Entry Specialist"
-    tier: 2
-  - query: "Customer Support Specialist"
-    tier: 2
-  - query: "Lead Generation Specialist"
-    tier: 2
-  - query: "LLM Data Annotation Specialist"
-    tier: 3
-  - query: "RLHF Specialist"
-    tier: 3
-  - query: "AI Alignment Specialist"
-    tier: 3
-  - query: "Multi-Modal Evaluation Specialist"
-    tier: 3
-  - query: "Red-Teaming Specialist"
-    tier: 3
