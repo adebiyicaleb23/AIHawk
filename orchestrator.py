@@ -106,6 +106,16 @@ log.info(f"Loaded {len(queries)} job categories to execute sequentially in prior
 from applypilot import pipeline
 from auto_applier import run_auto_apply
 
+# ── Pre-Apply Pass: Apply immediately to any existing tailored jobs ─────────
+print("\n" + "=" * 80, flush=True)
+print("🎯 INITIAL PASS: Applying immediately to pre-tailored high-fit jobs...", flush=True)
+print("=" * 80, flush=True)
+try:
+    init_stats = run_auto_apply()
+    print(f"Initial pass: {init_stats.get('applied', 0)} submitted, {init_stats.get('ready', 0)} prepared.\n", flush=True)
+except Exception as e:
+    log.warning(f"Initial auto-apply pass notice: {e}")
+
 total_queries = len(queries)
 for idx, q_item in enumerate(queries, 1):
     query_text = q_item.get("query", "")

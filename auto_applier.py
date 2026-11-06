@@ -470,19 +470,28 @@ def run_auto_apply() -> dict:
             log.info(f"\n---> [{score}/10] '{title}' at {site or 'Web'}")
             log.info(f"     URL: {target_url}")
 
-            # Locate resume PDF
-            resume_file = Path(resume_path_str)
-            if not resume_file.exists():
-                for alt in [
-                    APPLYPILOT_DIR / "tailored_resumes" / resume_file.name,
-                    APPLYPILOT_DIR / resume_path_str,
-                    Path("tailored_resumes") / resume_file.name,
-                    APPLYPILOT_DIR / "resume.pdf",
-                    Path("resume.pdf"),
-                ]:
-                    if alt.exists():
-                        resume_file = alt
-                        break
+            # Locate resume PDF (prioritize .pdf over .txt)
+            raw_path = Path(resume_path_str)
+            pdf_alt = raw_path.with_suffix('.pdf')
+            resume_file = None
+            for candidate in [
+                pdf_alt,
+                APPLYPILOT_DIR / "tailored_resumes" / pdf_alt.name,
+                Path("tailored_resumes") / pdf_alt.name,
+                Path("tailored_resumes") / "tailored_resumes" / pdf_alt.name,
+                raw_path,
+                APPLYPILOT_DIR / "tailored_resumes" / raw_path.name,
+                Path("tailored_resumes") / raw_path.name,
+                APPLYPILOT_DIR / "resume.pdf",
+                Path("resume.pdf"),
+            ]:
+                if candidate.exists():
+                    resume_file = candidate
+                    break
+
+            if not resume_file:
+                resume_file = pdf_alt
+            log.info(f"     Resume attachment: {resume_file.name}")
 
             page = context.new_page()
             try:

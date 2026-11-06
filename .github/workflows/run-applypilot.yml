@@ -47,6 +47,7 @@ jobs:
           with open(p, 'w') as f:
               json.dump(d, f, indent=2)
           "
+          python bootstrap_db.py
 
       - name: Run ApplyPilot Query-by-Query Loop & Auto-Applier
         env:
