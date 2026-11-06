@@ -450,9 +450,25 @@ def run_auto_apply() -> dict:
 
         for job in eligible_jobs:
             job_url, title, site, app_url, resume_path_str, score = job
-            target_url = app_url or job_url
-            if not target_url.startswith("http"):
+            target_url = app_url or job_url or ""
+
+            if not target_url:
+                log.info(f"Skipping '{title}' — no URL found.")
                 continue
+
+            # Normalize URL if scheme is missing
+            if target_url.startswith("//"):
+                target_url = "https:" + target_url
+            elif target_url.startswith("www."):
+                target_url = "https://" + target_url
+            elif target_url.startswith("/") and site:
+                site_domain = "talent.com" if "talent" in site.lower() else f"{site.lower().replace(' ', '')}.com"
+                target_url = f"https://{site_domain}" + target_url
+            elif not target_url.startswith("http://") and not target_url.startswith("https://"):
+                target_url = "https://" + target_url
+
+            log.info(f"\n---> [{score}/10] '{title}' at {site or 'Web'}")
+            log.info(f"     URL: {target_url}")
 
             # Locate resume PDF
             resume_file = Path(resume_path_str)
@@ -467,9 +483,6 @@ def run_auto_apply() -> dict:
                     if alt.exists():
                         resume_file = alt
                         break
-
-            log.info(f"\n---> [{score}/10] '{title}' at {site or 'Web'}")
-            log.info(f"     URL: {target_url}")
 
             page = context.new_page()
             try:
