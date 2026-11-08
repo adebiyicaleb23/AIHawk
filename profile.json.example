@@ -1,0 +1,22 @@
+{
+  "personal": {
+    "full_name": "Your Full Name",
+    "preferred_name": "Your First Name",
+    "email": "your.email@example.com",
+    "password": "your_email_password",
+    "phone": "+1234567890",
+    "city": "Your City",
+    "province_state": "Your State/Province",
+    "country": "Your Country",
+    "postal_code": "Your Postal Code",
+    "address": "Your Full Address",
+    "dob_day": "01",
+    "dob_month": "01",
+    "dob_year": "1990",
+    "dob": "01/01/1990",
+    "linkedin_url": "https://linkedin.com/in/yourprofile",
+    "github_url": "https://github.com/yourusername",
+    "portfolio_url": "https://yourportfolio.com",
+    "website_url": "https://yourwebsite.com"
+  }
+}

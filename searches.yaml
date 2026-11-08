@@ -1,57 +1,14 @@
-# ApplyPilot search configuration
-# Refined query order:
-# 1. AI Jobs FIRST (Tier 1)
-# 2. Administrative & Support (Tier 2)
-# 3. Freelance & Creative LAST (Tier 3)
-
 defaults:
-  location: "Remote"
   distance: 0
   hours_old: 168
+  location: Remote
   results_per_site: 10
-
-# LinkedIn + ZipRecruiter only — Indeed blocks GitHub Actions cloud IPs (403/429)
-sites:
-  - linkedin
-  - zip_recruiter
-
 locations:
-  - location: "Remote"
-    remote: true
-
+- location: Remote
+  remote: true
 queries:
-  # ── Tier 1: AI & LLM Specialist Jobs (FIRST) ──────────────────────────
-  - query: "AI Trainer"
-    tier: 1
-  - query: "AI Data Evaluator"
-    tier: 1
-  - query: "LLM Data Annotation Specialist"
-    tier: 1
-  - query: "RLHF Specialist"
-    tier: 1
-  - query: "AI Alignment Specialist"
-    tier: 1
-  - query: "Multi-Modal Evaluation Specialist"
-    tier: 1
-  - query: "Red-Teaming Specialist"
-    tier: 1
-
-  # ── Tier 2: Administrative & Client Support ────────────────────────────
-  - query: "Virtual Assistant"
-    tier: 2
-  - query: "Executive Assistant"
-    tier: 2
-  - query: "Customer Support Specialist"
-    tier: 2
-  - query: "Lead Generation Specialist"
-    tier: 2
-  - query: "Data Entry Specialist"
-    tier: 2
-
-  # ── Tier 3: Freelance & Creative Roles (LAST) ──────────────────────────
-  - query: "Social Media Manager"
-    tier: 3
-  - query: "Graphic Designer"
-    tier: 3
-  - query: "Video Editor"
-    tier: 3
+- query: AI Trainer
+  tier: 1
+sites:
+- linkedin
+- zip_recruiter

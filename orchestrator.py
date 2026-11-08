@@ -36,58 +36,7 @@ if not DB_PATH.exists():
     if local_db.exists():
         DB_PATH = local_db
 
-# ── 1. Activate 3-Key Instant Gemini Rotation ───────────────────────────────
-import applypilot.llm as llm_mod
-
-candidate_vars = ["GEMINI_API_KEY", "GEMINI_API_ACCESS", "GEMINI_API_NAME"]
-keys = []
-for var in candidate_vars:
-    val = os.environ.get(var, "").strip()
-    if val and val not in keys and len(val) > 15:
-        keys.append(val)
-
-for k, v in sorted(os.environ.items()):
-    val = v.strip()
-    if k.startswith("GEMINI_") and val and val not in keys and len(val) > 20:
-        keys.append(val)
-
-if keys:
-    key_index = 0
-    _orig_chat_compat = llm_mod.LLMClient._chat_compat
-
-    def _rotate_key(self):
-        global key_index
-        key_index = (key_index + 1) % len(keys)
-        self.api_key = keys[key_index]
-        log.info(f"[KeyRotator] Rate limit hit! Instantly rotated to Gemini key #{key_index + 1}")
-
-    def _fast_chat_compat(self, messages, temperature, max_tokens):
-        for _ in range(len(keys)):
-            self.api_key = keys[key_index]
-            resp = self._client.post(
-                f"{self.base_url}/chat/completions",
-                json={
-                    "model": self.model,
-                    "messages": messages,
-                    "temperature": temperature,
-                    "max_tokens": max_tokens,
-                },
-                headers={"Content-Type": "application/json", "Authorization": f"Bearer {self.api_key}"},
-            )
-            if resp.status_code == 429:
-                _rotate_key(self)
-                continue
-            if resp.status_code == 403 and self._is_gemini:
-                raise llm_mod._GeminiCompatForbidden(resp)
-            return self._handle_compat_response(resp)
-        return _orig_chat_compat(self, messages, temperature, max_tokens)
-
-    llm_mod.LLMClient._chat_compat = _fast_chat_compat
-    log.info(f"[KeyRotator] Instant rotation active across {len(keys)} Gemini keys.")
-else:
-    log.warning("[KeyRotator] No Gemini keys found in environment.")
-
-# ── 2. Load Master Search Queries ───────────────────────────────────────────
+# ── 1. Load Master Search Queries ───────────────────────────────────────────
 if not MASTER_SEARCHES_PATH.exists():
     log.error(f"Master searches file not found: {MASTER_SEARCHES_PATH}")
     sys.exit(1)
@@ -102,13 +51,13 @@ if not queries:
 
 log.info(f"Loaded {len(queries)} job categories to execute sequentially in priority order.")
 
-# ── 3. Query-by-Query Execution Loop ────────────────────────────────────────
+# ── 2. Query-by-Query Execution Loop ────────────────────────────────────────
 from applypilot import pipeline
-from auto_applier import run_auto_apply
+from auto_applier_refactored import run_auto_apply
 
 # ── Pre-Apply Pass: Apply immediately to any existing tailored jobs ─────────
 print("\n" + "=" * 80, flush=True)
-print("🎯 INITIAL PASS: Applying immediately to pre-tailored high-fit jobs...", flush=True)
+print("[INITIAL PASS] Applying immediately to pre-tailored high-fit jobs...", flush=True)
 print("=" * 80, flush=True)
 try:
     init_stats = run_auto_apply()
@@ -120,9 +69,9 @@ total_queries = len(queries)
 for idx, q_item in enumerate(queries, 1):
     query_text = q_item.get("query", "")
     tier = q_item.get("tier", 1)
-    
+
     print("\n" + "=" * 80, flush=True)
-    print(f"🚀 [STEP {idx}/{total_queries}] CATEGORY: '{query_text}' (Tier {tier})", flush=True)
+    print(f"[STEP {idx}/{total_queries}] CATEGORY: '{query_text}' (Tier {tier})", flush=True)
     print("=" * 80, flush=True)
 
     # Prepare single-query config for ApplyPilot
@@ -163,7 +112,8 @@ for idx, q_item in enumerate(queries, 1):
         pipeline.run_pipeline(
             stages=["discover", "enrich", "score", "tailor", "cover", "pdf"],
             min_score=7,
-            validation_mode="lenient"
+            validation_mode="lenient",
+            workers=3  # Use 3 parallel workers for LLM stages
         )
     except Exception as e:
         log.warning(f"Pipeline notice for '{query_text}': {e}")
@@ -184,9 +134,9 @@ with open(MASTER_SEARCHES_PATH, "w", encoding="utf-8") as f:
 with open(RUNNER_SEARCHES_PATH, "w", encoding="utf-8") as f:
     yaml.dump(master_cfg, f, default_flow_style=False)
 
-# ── 4. Final DB Summary ─────────────────────────────────────────────────────
+# ── 3. Final DB Summary ─────────────────────────────────────────────────────
 print("\n" + "=" * 80, flush=True)
-print("🎉 ALL 15 JOB CATEGORIES COMPLETED!", flush=True)
+print("[COMPLETED] ALL JOB CATEGORIES COMPLETED!", flush=True)
 print("=" * 80, flush=True)
 
 if DB_PATH.exists():
@@ -210,4 +160,3 @@ if DB_PATH.exists():
         conn.close()
     except Exception as e:
         log.warning(f"Could not print final summary: {e}")
-
