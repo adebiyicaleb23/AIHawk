@@ -10,7 +10,7 @@ import sqlite3
 from pathlib import Path
 from typing import List, Dict
 
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright, Page
 
 from auto_applier_refactored.models import Job, Candidate, ApplicationResult, ApplicationStatus, AutoApplySummary
 from auto_applier_refactored.config import load_candidate_profile, load_gemini_keys, get_tailored_resume_path
