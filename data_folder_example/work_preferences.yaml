@@ -1,5 +1,5 @@
-# Work Preferences Configuration Example
-# Copy this to data_folder/work_preferences.yaml and customize
+# Work Preferences Configuration
+# Based on your profile and searches.yaml
 
 # Work type preferences
 remote: true
@@ -32,19 +32,32 @@ date:
   week: true
   24_hours: false
 
-# Target positions (customize for your target roles)
+# Target positions (from your profile: AI Data Evaluator, RLHF, SFT, Multi-Modal AI Training)
 positions:
-  - "Software Engineer"
-  - "Data Scientist"
-  - "ML Engineer"
-  - "AI Engineer"
+  - "AI Trainer"
+  - "AI Data Evaluator"
+  - "RLHF Specialist"
+  - "SFT Specialist"
+  - "Multi-Modal AI Trainer"
+  - "LLM Evaluator"
+  - "Prompt Engineer"
+  - "AI Safety Researcher"
+  - "RLHF Annotator"
+  - "Data Annotation Specialist"
+  - "Virtual Assistant"
+  - "Customer Support Specialist"
+  - "Social Media Manager"
+  - "Graphic Designer"
+  - "Video Editor"
 
 # Target locations
 locations:
   - "Remote"
   - "United States"
-  - "San Francisco Bay Area"
-  - "New York"
+  - "United Kingdom"
+  - "Canada"
+  - "European Union"
+  - "Nigeria"
 
 # Apply once per company
 apply_once_at_company: true
@@ -56,6 +69,11 @@ distance: 0
 company_blacklist:
   - "wayfair"
   - "Crossover"
+  - "Meta"
+  - "Google"
+  - "Amazon"
+  - "Microsoft"
+  - "Apple"
 
 # Title blacklist - filter out irrelevant roles
 title_blacklist:
@@ -77,4 +95,8 @@ title_blacklist:
   - "human resources"
 
 # Location blacklist
-location_blacklist: []
+location_blacklist:
+  - "India"
+  - "Pakistan"
+  - "Bangladesh"
+  - "Philippines"

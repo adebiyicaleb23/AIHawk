@@ -1,21 +1,21 @@
 # Plain Text Resume - Structured Data for AI-Powered Applications
-# Copy this to data_folder/plain_text_resume.yaml and fill in your information
+# Generated from your profile.json
 
 personal_information:
-  full_name: "Your Full Name"
-  preferred_name: "Preferred Name"
-  email: "your.email@example.com"
-  phone: "+1-XXX-XXX-XXXX"
+  full_name: "Iyanuoluwa Adebiyi"
+  preferred_name: "Caleb"
+  email: "adebiyicaleb222@gmail.com"
+  phone: "+2347050301256"
   address: ""
-  city: "Your City"
-  state: "Your State"
-  country: "Your Country"
-  postal_code: "00000"
-  linkedin: "https://linkedin.com/in/yourprofile"
-  github: "https://github.com/yourusername"
-  portfolio: "https://yourportfolio.com"
-  website: "https://yourwebsite.com"
-  date_of_birth: "DD/MM/YYYY"
+  city: "Abuja"
+  state: "FCT"
+  country: "Nigeria"
+  postal_code: "900001"
+  linkedin: "https://www.linkedin.com/in/iyanuoluwa-adebiyi-5a3a78431"
+  github: "https://github.com/adebiyicaleb23"
+  portfolio: "https://iyanu-portfolio-pi.vercel.app/"
+  website: "https://adebiyicalebportfolio.vercel.app/"
+  date_of_birth: "23/12/2004"
 
 self_identification:
   gender: "Decline to self-identify"
@@ -25,6 +25,10 @@ self_identification:
   ethnicity: "Decline to self-identify"
 
 legal_authorization:
+  # Nigeria
+  legally_authorized_nigeria: true
+  requires_sponsorship_nigeria: false
+  visa_type_nigeria: ""
   # United States
   legally_authorized_us: false
   requires_sponsorship_us: true
@@ -41,14 +45,10 @@ legal_authorization:
   legally_authorized_uk: false
   requires_sponsorship_uk: true
   visa_type_uk: ""
-  # Add other countries as needed
-  legally_authorized_nigeria: false
-  requires_sponsorship_nigeria: false
-  visa_type_nigeria: ""
 
 work_preferences:
   remote_work: true
-  in_person_work: false
+  in_person_work: true
   open_to_relocation: true
   willing_to_complete_assessments: true
   willing_undergo_drug_test: true
@@ -59,71 +59,131 @@ availability:
 
 salary_expectations:
   currency: "USD"
-  min_salary: 100000
-  max_salary: 150000
+  min_salary: 80000
+  max_salary: 120000
 
 education_details:
-  - degree: "Master of Science"
-    field_of_study: "Computer Science"
-    institution: "University Name"
-    graduation_date: "2023"
-    gpa: "3.8"
-    honors: "Dean's List"
-    relevant_coursework: "Machine Learning, Distributed Systems, Algorithms"
-  - degree: "Bachelor of Science"
-    field_of_study: "Computer Science"
-    institution: "University Name"
-    graduation_date: "2021"
-    gpa: "3.7"
+  - degree: "Master's"
+    field_of_study: ""
+    institution: "University of Suffolk, United Kingdom"
+    graduation_date: ""
+    gpa: ""
     honors: ""
-    relevant_coursework: "Data Structures, Operating Systems, Databases"
+    relevant_coursework: ""
+  - degree: ""
+    field_of_study: ""
+    institution: "University of Abuja, Nigeria"
+    graduation_date: ""
+    gpa: ""
+    honors: ""
+    relevant_coursework: ""
 
 experience_details:
-  - company: "Current Company"
-    title: "Senior Software Engineer"
-    location: "San Francisco, CA (Remote)"
-    start_date: "2023-01"
+  - company: "Mercor"
+    title: "AI Data Evaluator & Domain Specialist"
+    location: "Remote"
+    start_date: ""
     end_date: "Present"
     description: |
-      - Led development of ML-powered features serving 1M+ users
-      - Built scalable data pipelines processing 10TB+ daily
-      - Mentored 3 junior engineers
-      - Technologies: Python, TensorFlow, Kubernetes, GCP
-  - company: "Previous Company"
-    title: "Software Engineer"
-    location: "New York, NY"
-    start_date: "2021-06"
-    end_date: "2022-12"
+      - Evaluating and ranking LLM outputs for quality, safety, and alignment
+      - Conducting RLHF (Reinforcement Learning from Human Feedback) preference ranking
+      - Creating gold-standard prompt-response datasets for supervised fine-tuning (SFT)
+      - Performing red-teaming and adversarial prompting to test model safety boundaries
+      - Benchmarking LLMs across multiple dimensions (helpfulness, harmlessness, honesty)
+      - Multi-modal QA including text, image, and video evaluation
+      - Semantic labeling and edge-case resolution for training data
+      - Constitutional AI alignment evaluation
+  - company: "Miva Open University"
+    title: "AI Trainer / Domain Specialist"
+    location: "Remote"
+    start_date: ""
+    end_date: ""
     description: |
-      - Developed REST APIs and microservices
-      - Improved system performance by 40%
-      - Technologies: Go, PostgreSQL, Docker, AWS
+      - Training and evaluating AI models for educational applications
+      - Creating high-quality training datasets for LLM fine-tuning
+      - Conducting model evaluation and benchmarking
+  - company: "Fiverr"
+    title: "Freelance AI Trainer & Evaluator"
+    location: "Remote"
+    start_date: ""
+    end_date: ""
+    description: |
+      - Providing AI training and evaluation services to clients
+      - RLHF preference ranking and data annotation
+      - Prompt engineering and model testing
+  - company: "Upwork"
+    title: "Freelance AI Data Specialist"
+    location: "Remote"
+    start_date: ""
+    end_date: ""
+    description: |
+      - Data annotation and model evaluation projects
+      - Supervised fine-tuning data creation
+      - Multi-modal AI training tasks
+  - company: "OneForma"
+    title: "AI Data Evaluator"
+    location: "Remote"
+    start_date: ""
+    end_date: ""
+    description: |
+      - Large-scale LLM evaluation and ranking
+      - Quality assurance for AI training data
+      - Red-teaming and safety testing
+  - company: "Turing"
+    title: "AI Trainer / Evaluator"
+    location: "Remote"
+    start_date: ""
+    end_date: ""
+    description: |
+      - LLM benchmarking and evaluation
+      - RLHF and preference ranking tasks
+      - Hallucination detection and edge-case resolution
 
 projects:
-  - name: "Open Source ML Library"
-    description: "Contributed to popular ML library with 10k+ stars. Implemented distributed training features."
-    technologies: ["Python", "PyTorch", "Distributed Computing"]
-    link: "https://github.com/example/project"
-  - name: "Personal Project"
-    description: "Built end-to-end ML pipeline for data analysis"
-    technologies: ["Python", "FastAPI", "PostgreSQL", "Docker"]
-    link: "https://github.com/example/project2"
+  - name: "Large Language Model (LLM) Safety, Alignment & Red-Teaming"
+    description: "Conducting adversarial prompting, red-teaming exercises, and safety evaluations to identify and mitigate harmful model behaviors. Testing boundary conditions and edge cases for production LLM deployment."
+    technologies: ["Python", "PyTorch", "Hugging Face Transformers", "RLHF", "Constitutional AI"]
+    link: ""
+  - name: "RLHF & Preference Ranking Optimization"
+    description: "Designing and executing reinforcement learning from human feedback workflows. Creating preference datasets, ranking model outputs, and optimizing reward models for alignment."
+    technologies: ["Python", "RLHF", "Preference Ranking", "Reward Modeling", "PPO"]
+    link: ""
+  - name: "Supervised Fine-Tuning (SFT) & Gold Standard Data Generation"
+    description: "Authoring thousands of high-quality prompt-response pairs for supervised fine-tuning. Ensuring 5-star rating standards for training data quality across diverse domains."
+    technologies: ["Python", "SFT", "Data Annotation", "Quality Assurance", "Transformers"]
+    link: ""
+  - name: "Multi-Modal AI Training & Multimedia Quality Assurance"
+    description: "Evaluating and training multi-modal models handling text, image, and video inputs. Quality assurance for multimedia AI applications."
+    technologies: ["Python", "Multi-Modal AI", "Computer Vision", "Video Understanding", "QA"]
+    link: ""
+  - name: "Virtual Assistance & Remote Operations Management"
+    description: "Managing remote operations, client communication, workflow organization, and administrative support using modern tooling (Zendesk, Google Workspace, Microsoft 365, CRM systems)."
+    technologies: ["Zendesk", "Google Workspace", "Microsoft 365", "CRM", "Workflow Automation"]
+    link: ""
 
 certifications:
+  - name: "Certified Scrum Master"
+    issuer: ""
+    date: ""
+    credential_id: ""
+    url: ""
   - name: "AWS Certified Solutions Architect"
     issuer: "Amazon Web Services"
-    date: "2023"
-    credential_id: "ABC123"
-    url: "https://aws.amazon.com/certification/"
+    date: ""
+    credential_id: ""
+    url: ""
 
 languages:
   - language: "English"
     proficiency: "Fluent"
   - language: "Spanish"
-    proficiency: "Conversational"
+    proficiency: "Intermediate"
 
 interests:
-  - "Machine Learning & AI"
-  - "Open Source Contribution"
-  - "Technical Writing"
-  - "Hiking"
+  - "AI Safety & Alignment Research"
+  - "LLM Evaluation & Benchmarking"
+  - "Prompt Engineering"
+  - "Multi-Modal AI Systems"
+  - "Graphic Design & Visual Branding"
+  - "Video Editing & Motion Design"
+  - "Social Media Strategy"
