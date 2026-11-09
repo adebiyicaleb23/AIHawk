@@ -15,12 +15,9 @@ jobs:
     timeout-minutes: 60
 
     env:
-      # Core credentials from GitHub Secrets (using YOUR secret names)
       LINKEDIN_EMAIL: ${{ secrets.MY_EMAIL }}
       LINKEDIN_PASSWORD: ${{ secrets.MY_EMAIL_PASSWORD }}
-      APPLICATION_EMAIL: ${{ secrets.MY_EMAIL }}  # Same as LinkedIn email
-
-      # Your Gemini API keys
+      APPLICATION_EMAIL: ${{ secrets.MY_EMAIL }}
       GEMINI_API_ACCESS: ${{ secrets.GEMINI_API_ACCESS }}
       GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
       GEMINI_API_NAME: ${{ secrets.GEMINI_API_NAME }}
@@ -33,7 +30,6 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
 
       - name: Install system dependencies
         run: |
@@ -66,43 +62,23 @@ jobs:
       - name: Prepare configuration files
         run: |
           mkdir -p data_folder
-
-          # Use your Gemini API key
-          GEMINI_KEY="${GEMINI_API_KEY}"
-
-          # Determine LLM provider (Gemini)
-          if [ -n "$GEMINI_KEY" ]; then
-            LLM_TYPE="gemini"
-            LLM_KEY="$GEMINI_KEY"
-            LLM_MODEL="gemini-1.5-flash"
-          else
-            echo "❌ No Gemini API key found in secrets!"
-            exit 1
-          fi
-
-          # Write secrets.yaml
-          cat > data_folder/secrets.yaml <<EOF
-llm_api_key: "$LLM_KEY"
-# llm_model_type: "$LLM_TYPE"
-# llm_model: "$LLM_MODEL"
-EOF
-
-          # Copy preferences and resume from examples
+          python -c "
+          import os, yaml
+          key = os.environ.get('GEMINI_API_KEY') or os.environ.get('GEMINI_API_ACCESS') or os.environ.get('GEMINI_API_NAME')
+          with open('data_folder/secrets.yaml', 'w') as f:
+              yaml.dump({'llm_api_key': key}, f)
+          "
           cp data_folder_example/work_preferences.yaml data_folder/
           cp data_folder_example/plain_text_resume.yaml data_folder/
-
-          # Update resume with application email from secrets
           if [ -n "$APPLICATION_EMAIL" ]; then
             sed -i "s/adebiyicaleb222@gmail.com/$APPLICATION_EMAIL/g" data_folder/plain_text_resume.yaml
           fi
-
-          echo "✅ Configuration prepared with $LLM_TYPE ($LLM_MODEL)"
+          echo "Configuration prepared successfully."
 
       - name: Run AIHawk (headless)
         run: |
           python main.py --headless
         env:
-          # Pass credentials to Python process
           LINKEDIN_EMAIL: ${{ secrets.MY_EMAIL }}
           LINKEDIN_PASSWORD: ${{ secrets.MY_EMAIL_PASSWORD }}
 
@@ -124,19 +100,15 @@ EOF
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- **Run ID:** ${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Date:** $(date -u)" >> $GITHUB_STEP_SUMMARY
-          echo "- **LLM:** ${LLM_TYPE:-unknown} (${LLM_MODEL:-unknown})" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-
           if [ -f data_folder/output/success.json ]; then
             APPLIED=$(jq length data_folder/output/success.json 2>/dev/null || echo 0)
             echo "- **Applied:** $APPLIED jobs" >> $GITHUB_STEP_SUMMARY
           fi
-
           if [ -f data_folder/output/failed.json ]; then
             FAILED=$(jq length data_folder/output/failed.json 2>/dev/null || echo 0)
             echo "- **Failed:** $FAILED jobs" >> $GITHUB_STEP_SUMMARY
           fi
-
           if [ -f data_folder/output/skipped.json ]; then
             SKIPPED=$(jq length data_folder/output/skipped.json 2>/dev/null || echo 0)
             echo "- **Skipped:** $SKIPPED jobs" >> $GITHUB_STEP_SUMMARY
