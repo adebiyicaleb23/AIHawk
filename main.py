@@ -117,7 +117,7 @@ def create_and_run_bot(
         collect_only: If True, only collect job data without applying
         headless: Run browser in headless mode
     """
-    logger.info("Starting ApplyPilot...")
+    logger.info("Starting AIHawk...")
 
     # Validate configuration
     try:
@@ -149,9 +149,16 @@ def create_and_run_bot(
         linkedin_password = os.getenv("LINKEDIN_PASSWORD")
 
         if not linkedin_email or not linkedin_password:
+            if headless:
+                logger.error("LinkedIn credentials (LINKEDIN_EMAIL and LINKEDIN_PASSWORD) are required in headless mode. Please configure them in environment variables or GitHub Secrets.")
+                sys.exit(1)
             logger.info("LinkedIn credentials not found in environment.")
-            linkedin_email = input("Enter LinkedIn email: ").strip()
-            linkedin_password = input("Enter LinkedIn password: ").strip()
+            try:
+                linkedin_email = input("Enter LinkedIn email: ").strip()
+                linkedin_password = input("Enter LinkedIn password: ").strip()
+            except (EOFError, KeyboardInterrupt):
+                logger.error("Interactive credential prompt not available.")
+                sys.exit(1)
 
         if not linkedin_email or not linkedin_password:
             logger.error("LinkedIn credentials are required")
