@@ -1,4 +1,4 @@
-name: ApplyPilot Auto-Apply
+name: AIHawk Auto-Apply
 
 on:
   schedule:
@@ -99,7 +99,7 @@ EOF
 
           echo "✅ Configuration prepared with $LLM_TYPE ($LLM_MODEL)"
 
-      - name: Run ApplyPilot (headless)
+      - name: Run AIHawk (headless)
         run: |
           python main.py --headless
         env:
@@ -111,7 +111,7 @@ EOF
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: applypilot-results-${{ github.run_id }}
+          name: aihawk-results-${{ github.run_id }}
           path: |
             job_applications/
             data_folder/output/
@@ -121,7 +121,7 @@ EOF
       - name: Summary
         if: always()
         run: |
-          echo "## ApplyPilot Run Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## AIHawk Run Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "- **Run ID:** ${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
           echo "- **Date:** $(date -u)" >> $GITHUB_STEP_SUMMARY

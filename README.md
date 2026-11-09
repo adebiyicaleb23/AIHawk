@@ -1,10 +1,10 @@
-# ApplyPilot - Automated Job Application System
+# AIHawk - AI-Powered Job Application Agent
 
-Adapted from [Auto_Jobs_Applier_AI_Agent](https://github.com/Intusar/Auto_Jobs_Applier_AI_Agent)
+> **Based on** [Auto_Jobs_Applier_AI_Agent](https://github.com/Intusar/Auto_Jobs_Applier_AI_Agent) by Intusar
 
 An AI-powered job application automation system that:
 - Searches for jobs on LinkedIn based on your preferences
-- Uses LLMs (OpenAI, Claude, Gemini, Ollama) to answer application questions
+- Uses LLMs (Gemini, OpenAI, Claude, Ollama) to answer application questions
 - Generates tailored cover letters and resumes
 - Auto-applies to jobs with "Easy Apply" on LinkedIn
 
@@ -14,7 +14,7 @@ An AI-powered job application automation system that:
 - 📄 **Dynamic Resume Generation**: Creates tailored resumes for each application
 - 🎯 **Smart Job Matching**: Filters jobs based on your preferences and blacklists
 - 🔐 **Secure Configuration**: YAML-based config with API keys stored separately
-- 🌐 **Multi-LLM Support**: OpenAI, Anthropic Claude, Google Gemini, Ollama (local), Perplexity
+- 🌐 **Multi-LLM Support**: Google Gemini, OpenAI, Anthropic Claude, Ollama (local), Perplexity
 - 📊 **Application Tracking**: Tracks applications, successes, and failures
 
 ## Quick Start
@@ -48,7 +48,7 @@ export LINKEDIN_PASSWORD="your-password"
 
 Or enter them when prompted during runtime.
 
-### 4. Run ApplyPilot
+### 4. Run AIHawk
 
 ```bash
 # Run with auto-apply (default)
@@ -64,14 +64,26 @@ python main.py --resume path/to/resume.pdf
 python main.py --headless
 ```
 
+## GitHub Actions (Automated Cloud Runs)
+
+This repo includes a GitHub Actions workflow for automated runs:
+
+1. **Add secrets** in GitHub: Settings → Secrets and variables → Actions
+   - `MY_EMAIL` - Your LinkedIn/application email
+   - `MY_EMAIL_PASSWORD` - Your LinkedIn password
+   - `GEMINI_API_KEY` - Your Google Gemini API key
+
+2. **Trigger manually**: Actions → AIHawk Auto-Apply → Run workflow
+
+3. **Auto-runs**: Weekdays at 9 AM UTC (configurable in `.github/workflows/aihawk.yml`)
+
+4. **Download results**: Artifacts include applications, logs, and summary stats
+
 ## Configuration Files
 
 ### `data_folder/secrets.yaml`
 ```yaml
-llm_api_key: "sk-your-openai-api-key"
-# ollama_url: "http://localhost:11434"  # For local Ollama
-# gemini_api_key: "your-gemini-key"      # For Google Gemini
-# claude_api_key: "your-claude-key"      # For Anthropic Claude
+llm_api_key: "your-gemini-api-key"
 ```
 
 ### `data_folder/work_preferences.yaml`
@@ -79,7 +91,6 @@ Configure job search parameters:
 - **Work type**: remote, hybrid, onsite
 - **Experience levels**: internship, entry, associate, mid_senior_level, director, executive
 - **Job types**: full_time, contract, part_time, etc.
-- **Date posted**: all_time, month, week, 24_hours
 - **Positions**: List of job titles to search for
 - **Locations**: List of locations (use "Remote" for remote jobs)
 - **Blacklists**: Companies, titles, and locations to exclude
@@ -87,8 +98,7 @@ Configure job search parameters:
 ### `data_folder/plain_text_resume.yaml`
 Structured resume data including:
 - Personal information (name, email, phone, links)
-- Self-identification (EEO data)
-- Legal authorization (work permits per country)
+- Work authorization per country
 - Work preferences (remote, relocation, etc.)
 - Education, experience, projects
 - Certifications, languages, interests
@@ -96,15 +106,17 @@ Structured resume data including:
 ## Project Structure
 
 ```
-applypilot/
+AIHawk/
 ├── main.py                    # Entry point
 ├── config.py                  # Configuration constants
 ├── constants.py               # Application constants
 ├── requirements.txt           # Python dependencies
+├── .github/workflows/aihawk.yml  # GitHub Actions workflow
 ├── data_folder/               # Configuration files (gitignored)
 │   ├── secrets.yaml
 │   ├── work_preferences.yaml
 │   └── plain_text_resume.yaml
+├── data_folder_example/       # Example configs (committed)
 ├── src/
 │   ├── job.py                 # Job data model
 │   ├── job_application.py     # Job application model
@@ -128,39 +140,13 @@ applypilot/
 └── logs/                      # Application logs
 ```
 
-## Usage Modes
-
-### Interactive Mode (Default)
-```bash
-python main.py
-```
-Opens browser window, logs into LinkedIn, and starts applying to jobs.
-
-### Data Collection Only
-```bash
-python main.py --collect
-```
-Discovers and saves job data without submitting applications.
-
-### Headless Mode (CI/CD)
-```bash
-python main.py --headless
-```
-Runs without visible browser window (for servers).
-
-### Custom Resume
-```bash
-python main.py --resume /path/to/resume.pdf
-```
-Uses a specific PDF resume instead of generated one.
-
 ## Supported LLM Providers
 
 | Provider | Model Type | Environment Variable |
 |----------|------------|---------------------|
+| Google | `gemini` | `GEMINI_API_KEY` |
 | OpenAI | `openai` | `OPENAI_API_KEY` |
 | Anthropic | `claude` | `ANTHROPIC_API_KEY` |
-| Google | `gemini` | `GOOGLE_API_KEY` |
 | Ollama | `ollama` | Local (no key needed) |
 | Perplexity | `perplexity` | `PERPLEXITY_API_KEY` |
 
@@ -192,32 +178,10 @@ Tracking files in `data_folder/output/`:
 - **Error handling**: Graceful failure recovery
 - **Manual login**: You control LinkedIn authentication
 
-## Troubleshooting
-
-### LinkedIn Login Issues
-- Ensure you can log in manually first
-- Check for 2FA - complete it manually when prompted
-- LinkedIn may block automated logins - use persistent Chrome profile
-
-### No Jobs Found
-- Check work_preferences.yaml positions/locations
-- Verify blacklists aren't too restrictive
-- Try broader search terms
-
-### LLM Errors
-- Verify API key in secrets.yaml
-- Check API quota/limits
-- Try different model (e.g., gpt-4o-mini for cost savings)
-
-### Browser Issues
-- Update Chrome/Chromium
-- Run `playwright install chromium`
-- Check ChromeDriver version matches Chrome
-
 ## License
 
 AGPL-3.0 - See LICENSE file for details.
 
 ## Credits
 
-Based on [Auto_Jobs_Applier_AI_Agent](https://github.com/Intusar/Auto_Jobs_Applier_AI_Agent) by Intusar.
+Based on [Auto_Jobs_Applier_AI_Agent](https://github.com/Intusar/Auto_Jobs_Applier_AI_Agent) by Intusar (AIHawk project).
