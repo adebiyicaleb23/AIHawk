@@ -1,0 +1,80 @@
+# Work Preferences Configuration Example
+# Copy this to data_folder/work_preferences.yaml and customize
+
+# Work type preferences
+remote: true
+hybrid: true
+onsite: false
+
+# Experience levels to target
+experience_level:
+  internship: false
+  entry: true
+  associate: true
+  mid_senior_level: true
+  director: false
+  executive: false
+
+# Job types
+job_types:
+  full_time: true
+  contract: true
+  part_time: false
+  temporary: false
+  internship: false
+  other: false
+  volunteer: false
+
+# Job posting recency
+date:
+  all_time: false
+  month: false
+  week: true
+  24_hours: false
+
+# Target positions (customize for your target roles)
+positions:
+  - "Software Engineer"
+  - "Data Scientist"
+  - "ML Engineer"
+  - "AI Engineer"
+
+# Target locations
+locations:
+  - "Remote"
+  - "United States"
+  - "San Francisco Bay Area"
+  - "New York"
+
+# Apply once per company
+apply_once_at_company: true
+
+# Search distance (0 for remote)
+distance: 0
+
+# Company blacklist
+company_blacklist:
+  - "wayfair"
+  - "Crossover"
+
+# Title blacklist - filter out irrelevant roles
+title_blacklist:
+  - "manager"
+  - "director"
+  - "vp"
+  - "vice president"
+  - "head of"
+  - "lead"
+  - "principal"
+  - "staff"
+  - "architect"
+  - "senior manager"
+  - "sales"
+  - "account executive"
+  - "business development"
+  - "recruiter"
+  - "hr"
+  - "human resources"
+
+# Location blacklist
+location_blacklist: []

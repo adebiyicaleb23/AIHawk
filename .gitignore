@@ -1,26 +1,71 @@
-# ApplyPilot runtime output
-applypilot.db
-applypilot.db-journal
-.applypilot/
-tailored_resumes/
-cover_letters/
-logs/
-chrome-workers/
-apply-workers/
-extracted_resume.txt
-saved_codespaces.html
-
-# Environment variables & secrets
-.env
-.env.*
-
-# Candidate profile (contains secrets)
-profile.json
+# ApplyPilot - Git Ignore
 
 # Python
 __pycache__/
 *.py[cod]
 *$py.class
-venv/
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
 .venv/
+venv/
+env/
+ENV/
 
+# Configuration (sensitive)
+data_folder/secrets.yaml
+data_folder/*.yaml
+!data_folder_example/*.yaml
+
+# Output directories
+job_applications/
+data_folder/output/
+logs/
+log/
+*.log
+
+# Browser profiles
+chrome_profile/
+chrome_profile_example/
+
+# Database
+*.db
+*.db-shm
+*.db-wal
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Distribution
+dist/
+build/
+*.egg-info/
+*.egg
+
+# Testing
+.coverage
+.pytest_cache/
+
+# Temporary
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Playwright
+playwright/.cache/

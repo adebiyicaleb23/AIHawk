@@ -1,0 +1,129 @@
+# Plain Text Resume - Structured Data for AI-Powered Applications
+# Copy this to data_folder/plain_text_resume.yaml and fill in your information
+
+personal_information:
+  full_name: "Your Full Name"
+  preferred_name: "Preferred Name"
+  email: "your.email@example.com"
+  phone: "+1-XXX-XXX-XXXX"
+  address: ""
+  city: "Your City"
+  state: "Your State"
+  country: "Your Country"
+  postal_code: "00000"
+  linkedin: "https://linkedin.com/in/yourprofile"
+  github: "https://github.com/yourusername"
+  portfolio: "https://yourportfolio.com"
+  website: "https://yourwebsite.com"
+  date_of_birth: "DD/MM/YYYY"
+
+self_identification:
+  gender: "Decline to self-identify"
+  pronouns: ""
+  veteran_status: "Decline to self-identify"
+  disability_status: "Decline to self-identify"
+  ethnicity: "Decline to self-identify"
+
+legal_authorization:
+  # United States
+  legally_authorized_us: false
+  requires_sponsorship_us: true
+  visa_type_us: "H-1B"
+  # European Union
+  legally_authorized_eu: false
+  requires_sponsorship_eu: true
+  visa_type_eu: ""
+  # Canada
+  legally_authorized_canada: false
+  requires_sponsorship_canada: true
+  visa_type_canada: ""
+  # United Kingdom
+  legally_authorized_uk: false
+  requires_sponsorship_uk: true
+  visa_type_uk: ""
+  # Add other countries as needed
+  legally_authorized_nigeria: false
+  requires_sponsorship_nigeria: false
+  visa_type_nigeria: ""
+
+work_preferences:
+  remote_work: true
+  in_person_work: false
+  open_to_relocation: true
+  willing_to_complete_assessments: true
+  willing_undergo_drug_test: true
+  willing_undergo_background_check: true
+
+availability:
+  notice_period: "Immediately"
+
+salary_expectations:
+  currency: "USD"
+  min_salary: 100000
+  max_salary: 150000
+
+education_details:
+  - degree: "Master of Science"
+    field_of_study: "Computer Science"
+    institution: "University Name"
+    graduation_date: "2023"
+    gpa: "3.8"
+    honors: "Dean's List"
+    relevant_coursework: "Machine Learning, Distributed Systems, Algorithms"
+  - degree: "Bachelor of Science"
+    field_of_study: "Computer Science"
+    institution: "University Name"
+    graduation_date: "2021"
+    gpa: "3.7"
+    honors: ""
+    relevant_coursework: "Data Structures, Operating Systems, Databases"
+
+experience_details:
+  - company: "Current Company"
+    title: "Senior Software Engineer"
+    location: "San Francisco, CA (Remote)"
+    start_date: "2023-01"
+    end_date: "Present"
+    description: |
+      - Led development of ML-powered features serving 1M+ users
+      - Built scalable data pipelines processing 10TB+ daily
+      - Mentored 3 junior engineers
+      - Technologies: Python, TensorFlow, Kubernetes, GCP
+  - company: "Previous Company"
+    title: "Software Engineer"
+    location: "New York, NY"
+    start_date: "2021-06"
+    end_date: "2022-12"
+    description: |
+      - Developed REST APIs and microservices
+      - Improved system performance by 40%
+      - Technologies: Go, PostgreSQL, Docker, AWS
+
+projects:
+  - name: "Open Source ML Library"
+    description: "Contributed to popular ML library with 10k+ stars. Implemented distributed training features."
+    technologies: ["Python", "PyTorch", "Distributed Computing"]
+    link: "https://github.com/example/project"
+  - name: "Personal Project"
+    description: "Built end-to-end ML pipeline for data analysis"
+    technologies: ["Python", "FastAPI", "PostgreSQL", "Docker"]
+    link: "https://github.com/example/project2"
+
+certifications:
+  - name: "AWS Certified Solutions Architect"
+    issuer: "Amazon Web Services"
+    date: "2023"
+    credential_id: "ABC123"
+    url: "https://aws.amazon.com/certification/"
+
+languages:
+  - language: "English"
+    proficiency: "Fluent"
+  - language: "Spanish"
+    proficiency: "Conversational"
+
+interests:
+  - "Machine Learning & AI"
+  - "Open Source Contribution"
+  - "Technical Writing"
+  - "Hiking"
