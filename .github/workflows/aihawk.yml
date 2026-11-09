@@ -1,9 +1,8 @@
 name: AIHawk Auto-Apply
 
 on:
-  schedule:
-    # Run weekdays at 9 AM UTC (adjust cron as needed)
-    - cron: '0 9 * * 1-5'
+  push:
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
