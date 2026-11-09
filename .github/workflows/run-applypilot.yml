@@ -1,0 +1,74 @@
+name: Run ApplyPilot
+
+on:
+  schedule:
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-applypilot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install ApplyPilot and Dependencies
+        run: |
+          pip install --upgrade pip
+          pip install applypilot
+          pip install --no-deps python-jobspy
+          pip install pydantic tls-client requests markdownify regex curl_cffi pyyaml httpx
+          playwright install --with-deps chromium
+
+      - name: Copy Profile, Resume, and Searches
+        env:
+          MY_EMAIL: ${{ secrets.MY_EMAIL }}
+          MY_EMAIL_PASSWORD: ${{ secrets.MY_EMAIL_PASSWORD }}
+        run: |
+          mkdir -p /home/runner/.applypilot
+          cp profile.json /home/runner/.applypilot/
+          cp searches.yaml /home/runner/.applypilot/
+          cp resume.txt /home/runner/.applypilot/
+          cp resume.pdf /home/runner/.applypilot/ 2>/dev/null || true
+          python -c "
+          import json, os
+          p = '/home/runner/.applypilot/profile.json'
+          with open(p, 'r') as f:
+              d = json.load(f)
+          if os.environ.get('MY_EMAIL'):
+              d['personal']['email'] = os.environ['MY_EMAIL']
+          if os.environ.get('MY_EMAIL_PASSWORD'):
+              d['personal']['password'] = os.environ['MY_EMAIL_PASSWORD']
+          with open(p, 'w') as f:
+              json.dump(d, f, indent=2)
+          "
+          python bootstrap_db.py
+
+      - name: Run ApplyPilot Query-by-Query Loop & Auto-Applier
+        env:
+          APPLYPILOT_DIR: /home/runner/.applypilot
+          MY_EMAIL: ${{ secrets.MY_EMAIL }}
+          MY_EMAIL_PASSWORD: ${{ secrets.MY_EMAIL_PASSWORD }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_ACCESS: ${{ secrets.GEMINI_API_ACCESS }}
+          GEMINI_API_NAME: ${{ secrets.GEMINI_API_NAME }}
+          LLM_MODEL: gemini-3.1-flash-lite
+          PYTHONUNBUFFERED: "1"
+        run: |
+          python orchestrator.py
+
+      - name: Upload Tailored Resumes & Results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tailored-resumes
+          path: |
+            /home/runner/.applypilot/tailored_resumes/
+            /home/runner/.applypilot/cover_letters/
+            /home/runner/.applypilot/applypilot.db
+          if-no-files-found: ignore
