@@ -16,17 +16,15 @@ jobs:
     timeout-minutes: 60
 
     env:
-      # Core credentials from GitHub Secrets
-      LINKEDIN_EMAIL: ${{ secrets.LINKEDIN_EMAIL }}
-      LINKEDIN_PASSWORD: ${{ secrets.LINKEDIN_PASSWORD }}
-      APPLICATION_EMAIL: ${{ secrets.APPLICATION_EMAIL }}
+      # Core credentials from GitHub Secrets (using YOUR secret names)
+      LINKEDIN_EMAIL: ${{ secrets.MY_EMAIL }}
+      LINKEDIN_PASSWORD: ${{ secrets.MY_EMAIL_PASSWORD }}
+      APPLICATION_EMAIL: ${{ secrets.MY_EMAIL }}  # Same as LinkedIn email
 
-      # LLM API Keys (will use first available)
-      GEMINI_API_KEY_1: ${{ secrets.GEMINI_API_KEY_1 }}
-      GEMINI_API_KEY_2: ${{ secrets.GEMINI_API_KEY_2 }}
-      GEMINI_API_KEY_3: ${{ secrets.GEMINI_API_KEY_3 }}
-      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      # Your Gemini API keys
+      GEMINI_API_ACCESS: ${{ secrets.GEMINI_API_ACCESS }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GEMINI_API_NAME: ${{ secrets.GEMINI_API_NAME }}
 
     steps:
       - name: Checkout repository
@@ -70,24 +68,16 @@ jobs:
         run: |
           mkdir -p data_folder
 
-          # Use first available Gemini key, fallback to others
-          GEMINI_KEY="${GEMINI_API_KEY_1:-${GEMINI_API_KEY_2:-${GEMINI_API_KEY_3}}}"
+          # Use your Gemini API key
+          GEMINI_KEY="${GEMINI_API_KEY}"
 
-          # Determine LLM provider (prefer Gemini if available)
+          # Determine LLM provider (Gemini)
           if [ -n "$GEMINI_KEY" ]; then
             LLM_TYPE="gemini"
             LLM_KEY="$GEMINI_KEY"
             LLM_MODEL="gemini-1.5-flash"
-          elif [ -n "$OPENAI_API_KEY" ]; then
-            LLM_TYPE="openai"
-            LLM_KEY="$OPENAI_API_KEY"
-            LLM_MODEL="gpt-4o-mini"
-          elif [ -n "$ANTHROPIC_API_KEY" ]; then
-            LLM_TYPE="claude"
-            LLM_KEY="$ANTHROPIC_API_KEY"
-            LLM_MODEL="claude-3-haiku-20240307"
           else
-            echo "❌ No LLM API key found in secrets!"
+            echo "❌ No Gemini API key found in secrets!"
             exit 1
           fi
 
@@ -98,7 +88,7 @@ llm_api_key: "$LLM_KEY"
 # llm_model: "$LLM_MODEL"
 EOF
 
-          # Copy preferences and resume from examples (or use repo versions if committed)
+          # Copy preferences and resume from examples
           cp data_folder_example/work_preferences.yaml data_folder/
           cp data_folder_example/plain_text_resume.yaml data_folder/
 
@@ -114,8 +104,8 @@ EOF
           python main.py --headless
         env:
           # Pass credentials to Python process
-          LINKEDIN_EMAIL: ${{ secrets.LINKEDIN_EMAIL }}
-          LINKEDIN_PASSWORD: ${{ secrets.LINKEDIN_PASSWORD }}
+          LINKEDIN_EMAIL: ${{ secrets.MY_EMAIL }}
+          LINKEDIN_PASSWORD: ${{ secrets.MY_EMAIL_PASSWORD }}
 
       - name: Upload application results
         if: always()
